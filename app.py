@@ -154,7 +154,7 @@ def mechanics():
             FROM users
             JOIN profiles ON users.id = profiles.user_id
             JOIN locations ON profiles.location_id = locations.id
-            WHERE location.id=?;''', location_id)
+            WHERE locations.id=?;''', location_id)
         else:
             mechanics = db.execute('''SELECT
                 users.id AS user_id,
