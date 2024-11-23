@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}View Issues{% endblock %}
+
+{% block main %}
+<div class="container">
+    <h2 class="mb-4 text-center">Logged Issues</h2>
+
+    <!-- Create New Issue Button -->
+    {% if session["user_id"] %}
+    <div class="text-center mb-4">
+        <a href="/create_issue" class="btn btn-success">
+            <i class="bi bi-plus-circle me-2"></i>Create New Issue
+        </a>
+    </div>
+    {% endif %}
+
+    <!-- Filter Dropdowns -->
+    <form method="post" action="/issues" class="mb-4">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="status" class="form-label">Filter by Status:</label>
+                <select id="status" name="status" class="form-select">
+                    <option value="0" {% if selected_status == "0" %}selected{% endif %}>Open</option>
+                    <option value="1" {% if selected_status == "1" %}selected{% endif %}>Closed</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="location" class="form-label">Filter by Location:</label>
+                <select id="location" name="location" class="form-select">
+                    {% for loc in LOCATIONS %}
+                        <option value="{{ loc.id }}" {% if selected_location == loc.id %}selected{% endif %}>
+                            {{ loc.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="text-center mt-3">
+            <button type="submit" class="btn btn-primary">Apply Filters</button>
+        </div>
+    </form>
+
+    <!-- Issues Table -->
+    {% if issues %}
+        <div class="row">
+            <table class="table table-bordered table-hover">
+                <thead class="table-info">
+                    <tr>
+                        <th>S/N</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Location</th>
+                        <th>Reported By</th>
+                        <th>Contact</th>
+                        <th>Issue Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for issue in issues %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ issue.issue_title }}</td>
+                            <td>{{ issue.issue_body }}</td>
+                            <td>{{ issue.location_name }}</td>
+                            <td>{{ issue.profile_display_name }}</td>
+                            <td>{{ issue.profile_email }}</td>
+                            <td>{% if issue.issue_status == 1 %}Closed{% else %}Open{% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="text-center mt-4">
+            <p class="text-muted">No issues to display. Try adjusting your filters or create a new issue.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block title %}Create Profile{% endblock %}
+
+{% block main %}
+<h1 class="mb-4">Create Your Profile</h1>
+<form action="/create_profile" method="post" class="needs-validation mx-auto" style="max-width: 600px;" novalidate>
+    <!-- Display Name -->
+    <div class="mb-3">
+        <label for="display_name" class="form-label">Display Name</label>
+        <input
+            type="text"
+            class="form-control"
+            id="display_name"
+            name="display_name"
+            required
+            placeholder="Enter your display name"
+        />
+        <div class="invalid-feedback">Please provide a display name.</div>
+    </div>
+
+    <!-- Bio -->
+    <div class="mb-3">
+        <label for="bio" class="form-label">Bio</label>
+        <textarea
+            class="form-control"
+            id="bio"
+            name="bio"
+            rows="4"
+            required
+            placeholder="Write a brief bio about yourself"
+        ></textarea>
+        <div class="invalid-feedback">Please provide a bio.</div>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            required
+            placeholder="Enter your email address"
+        />
+        <div class="invalid-feedback">Please provide a valid email address.</div>
+    </div>
+
+    <!-- Location -->
+    <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <select class="form-select" id="location" name="location_id" required>
+            <option value="" disabled selected>Select your location</option>
+            {% for location in LOCATIONS %}
+            <option value="{{ location.id }}">{{ location.name }}</option>
+            {% endfor %}
+        </select>
+        <div class="invalid-feedback">Please select a location.</div>
+    </div>
+
+    <!-- Submit Button -->
+    <a href="/create_profile"><button type="submit" class="btn btn-primary w-100">Create Profile</button></a>
+</form>
+
+<script>
+    // Bootstrap validation script
+    (function () {
+        "use strict";
+        window.addEventListener(
+            "load",
+            function () {
+                var forms = document.getElementsByClassName("needs-validation");
+                Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener(
+                        "submit",
+                        function (event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add("was-validated");
+                        },
+                        false
+                    );
+                });
+            },
+            false
+        );
+    })();
+</script>
+{% endblock %}

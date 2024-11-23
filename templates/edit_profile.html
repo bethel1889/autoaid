@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block main %}
+<h1 class="mb-4">Edit Profile</h1>
+
+<!-- Edit Profile Form -->
+<form action="/edit_profile" method="POST" class="mx-auto" style="max-width: 600px;">
+    <!-- Display Name -->
+    <div class="mb-3">
+        <label for="display_name" class="form-label">Display Name</label>
+        <input
+            type="text"
+            class="form-control"
+            id="display_name"
+            name="display_name"
+            value="{{ profile.display_name }}"
+            required
+        />
+    </div>
+
+    <!-- Bio -->
+    <div class="mb-3">
+        <label for="bio" class="form-label">Bio</label>
+        <textarea
+            class="form-control"
+            id="bio"
+            name="bio"
+            rows="4"
+            required
+        >{{ profile.bio }}</textarea>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            value="{{ profile.email }}"
+            required
+        />
+    </div>
+
+    <!-- Location Dropdown -->
+    <div class="mb-3">
+        <label for="location_id" class="form-label">Location</label>
+        <select class="form-select" id="location_id" name="location_id" required>
+            <option selected value="{{ profile.location_id }}">{{profile.location}}</option>
+            {% for location in LOCATIONS %}
+            <option
+                value="{{ location.id }}"
+                {% if location.id == profile.location_id %}selected{% endif %}
+            >
+                {{ location.name }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Save Button -->
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="/profile" class="btn btn-secondary ms-2">Cancel</a>
+    </div>
+</form>
+{% endblock %}

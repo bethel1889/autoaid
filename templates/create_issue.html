@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}Create Issue{% endblock %}
+
+{% block main %}
+<h1 class="mb-4">Create a New Issue</h1>
+
+<!-- Issue Form -->
+<div class="card mx-auto shadow-sm" style="max-width: 600px;">
+    <div class="card-body">
+        <form action="/create_issue" method="post">
+            <!-- Title -->
+            <div class="mb-3">
+                <label for="title" class="form-label">Issue Title</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    name="title"
+                    placeholder="Enter a concise title"
+                    required
+                />
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label for="body" class="form-label">Description</label>
+                <textarea
+                    class="form-control"
+                    id="body"
+                    name="body"
+                    rows="5"
+                    placeholder="Describe the issue in detail"
+                    required
+                ></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100">Submit Issue</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

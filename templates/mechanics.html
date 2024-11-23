@@ -1,0 +1,64 @@
+{% extends "layout.html" %} {% block title %} Mechanics {% endblock %} {% block
+main %}
+<h1>Find Mechanics</h1>
+<p style="font-size: 20px">Select your desired location to find mechanic</p>
+<!-- TODO: Create a form for users to submit a name, a month, and a day -->
+<div style="padding-left: 50px; padding-right: 50px; margin-bottom: 50px">
+    <form action="/mechanics" method="POST">
+        <div class="mb-3">
+            <select class="form-select mx-auto w-auto" name="location" required>
+                <option disabled selected>Location</option>
+                <option value="0">All</option>
+                {% for location in LOCATIONS %}
+                <option value="{{ location.id }}">{{ location.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <!--<div class="mb-3">
+            <select class="form-select mx-auto w-auto" name="program_stream" required>
+                <option disabled selected>Car Specialty</option>
+                <option>All</option>
+                {% for car in CARS %}
+                <option>{{ car.name }}</option>
+                {% endfor %}
+            </select>
+        </div>-->
+        <div class="mb-3">
+            <input
+                class="btn btn-primary"
+                style="width: 150px"
+                type="submit"
+                value="Search"
+            />
+        </div>
+    </form>
+</div>
+
+{% if mechanics %}
+<h2>Search Results</h2>
+<div style="margin-left: 50px; margin-right: 50px">
+    <table class="table">
+        <thead class="table-success">
+            <tr>
+                <th>S/N</th>
+                <th>Name</th>
+                <th>Bio</th>
+                <th>Location</th>
+                <th>Contact</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mechanic in mechanics %}
+            <tr>
+                <td>{{ mechanics.index(mechanic) + 1 }}</td>
+                <td>{{ mechanic.username }}</td>
+                <td>{{ mechanic.bio }}</td>
+                <td>{{ mechanic.location_name }}</td>
+                <td>{{ mechanic.email }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %} {% endblock %}
+

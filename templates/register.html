@@ -1,0 +1,59 @@
+{% extends "layout.html" %} {% block title %} Register {% endblock %} {% block
+main %}
+<div class="text-center mb-4">
+    <h1 class="display-4">Join <span class="text-primary">Aut<img
+        src="/static/fix-icon.svg"
+        width="40"
+        height="40"
+        alt="o"
+    />aid</span> Today</h1>
+    <p class="lead">We connect skilled mechanics to clients who need them the most.
+        <br />
+        Already have an account? <a href="/login">login</a>.</p>
+</div>
+
+<form action="/register" method="post">
+    <div class="mb-3">
+        <input
+            autocomplete="off"
+            autofocus
+            class="form-control mx-auto w-auto"
+            name="username"
+            placeholder="Username"
+            type="text"
+            required
+        />
+    </div>
+    <div class="mb-3">
+        <input
+            class="form-control mx-auto w-auto"
+            name="password"
+            placeholder="Password"
+            type="password"
+            required
+        />
+    </div>
+    <div class="mb-3">
+        <input
+            class="form-control mx-auto w-auto"
+            name="confirmation"
+            placeholder="Confirm Password"
+            type="password"
+            required
+        />
+    </div>
+    <div class="mb-3">
+        <select
+            class="form-select mx-auto w-auto"
+            name="role"
+            autofocus
+            required
+        >
+            <option disabled selected>I am a...</option>
+            <option value="0">Customer</option>
+            <option value="1">Mechanic</option>
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Register</button>
+</form>
+{% endblock %}

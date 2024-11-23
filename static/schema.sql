@@ -1,0 +1,35 @@
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    username TEXT NOT NULL UNIQUE,
+    hash TEXT NOT NULL,
+    role INTEGER NOT NULL CHECK (role IN (0, 1))
+);
+
+DROP TABLE IF EXISTS locations;
+CREATE TABLE locations (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    name TEXT NOT NULL
+);
+
+DROP TABLE IF EXISTS profiles;
+CREATE TABLE profiles (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    display_name TEXT NOT NULL,
+    bio TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    user_id INTEGER NOT NULL,
+    location_id INTEGER NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY(location_id) REFERENCES locations(id)
+);
+
+DROP TABLE IF EXISTS issues;
+CREATE TABLE issues (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    title TEXT NOT NULL,
+    body TEXT NOT NULL,
+    status INTEGER NOT NULL CHECK (status IN (0, 1)),
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+);

@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+
+{% block title %}View Profile{% endblock %}
+
+{% block main %}
+<div class="container mt-5">
+    <!-- Profile Heading -->
+    <div class="text-center mb-4">
+        <h1 class="display-4">{{ profile.display_name }}</h1>
+        <p class="text-muted">Your personalized profile page</p>
+    </div>
+
+    <!-- Profile Card -->
+    <div class="card mx-auto shadow-lg rounded-3 border-0" style="max-width: 700px;">
+        <div class="card-header bg-primary text-white text-center py-4 rounded-top">
+            <h5 class="mb-0">Profile Details</h5>
+        </div>
+        <div class="card-body bg-light">
+            <!-- Bio -->
+            <div class="mb-4">
+                <strong class="text-uppercase text-secondary">Bio:</strong>
+                <p class="text-dark lead mb-0">{{ profile.bio }}</p>
+            </div>
+
+            <!-- Divider -->
+            <hr class="my-4" />
+
+            <!-- Email -->
+            <div class="mb-4">
+                <strong class="text-uppercase text-secondary">Email:</strong>
+                <p class="text-dark lead mb-0">
+                    <a href="mailto:{{ profile.email }}" class="text-decoration-none text-primary">
+                        {{ profile.email }}
+                    </a>
+                </p>
+            </div>
+
+            <!-- Divider -->
+            <hr class="my-4" />
+
+            <!-- Location -->
+            <div class="mb-4">
+                <strong class="text-uppercase text-secondary">Location:</strong>
+                <p class="text-dark lead mb-0">{{ profile.location_name }}</p>
+            </div>
+
+            <!-- Edit and Add Issue Buttons -->
+            <div class="text-center mt-4">
+                {% if profile.user_id == session["user_id"] %}
+                <a href="/edit_profile" class="btn btn-primary me-2">
+                    <i class="bi bi-pencil-fill me-2"></i>Edit Profile
+                </a>
+                <a href="/create_issue" class="btn btn-success">
+                    <i class="bi bi-plus-circle-fill me-2"></i>Add Issue
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    </div>
+    {% if issues %}
+        <div class="row">
+            <table class="table table-bordered table-hover">
+                <thead class="table-info">
+                    <tr>
+                        <th>S/N</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Location</th>
+                        <th>Reported By</th>
+                        <th>Contact</th>
+                        <th>Issue Status</th>
+                        {% if session["user_id"] %}
+                            <th>Actions</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for issue in issues %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ issue.issue_title }}</td>
+                            <td>{{ issue.issue_body }}</td>
+                            <td>{{ issue.location_name }}</td>
+                            <td>{{ issue.profile_display_name }}</td>
+                            <td>{{ issue.profile_email }}</td>
+                            <td>{% if issue.issue_status == 1 %}Closed{% else %}Open{% endif %}
+                            </td>
+
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    <a
+                                        href="/edit_issue?issue_id={{ issue.issue_id }}"                                            {{ issue.id }}"
+                                        class="btn btn-warning btn-sm me-2"
+                                    >Edit</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="text-center mt-4">
+            <p class="text-muted">No issues to display. Try adjusting your filters or create a new issue.</p>
+        </div>
+    {% endif %}
+{% endblock %}

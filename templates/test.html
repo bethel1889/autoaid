@@ -1,0 +1,25 @@
+{% extends "layout.html" %} {% block title %} HomePage {% endblock %} {% block
+    main %}
+    <div style="font-size: 18px">
+        <h1>
+            Welcome to Autoaid {% if username %} {{ username }} {% endif %}! <br />
+        </h1>
+        <hr />
+        <div>
+            <p>
+                Do you have car trouble and need the best mechanic for your car?<br />
+                Are you a skilled mechanic who needs to find clients all over the
+                country in need of your services?<br />
+            </p>
+        </div>
+        <hr />
+        <div>
+            <a class="btn btn-primary" style="width: 150px" href="/mechanics">
+                Find a Mechanic</a
+            >
+            <a class="btn btn-primary" style="width: 150px" href="/about">
+                Report an Issue</a
+            >
+        </div>
+    </div>
+    {% endblock %}

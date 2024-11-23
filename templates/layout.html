@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+        <!-- http://getbootstrap.com/docs/5.3/ -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- https://favicon.io/emoji-favicons/money-bag/ -->
+        <link href="/static/fix-icon.svg" rel="icon" />
+
+        <link href="/static/styles.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet"
+        />
+
+        <title>Autoaid: {% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm py-3">
+    <div class="container-fluid">
+        <!-- Brand -->
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <span class="text-primary me-1">Aut</span>
+            <img src="/static/fix-icon.svg" width="30" height="30" alt="o">
+            <span class="text-primary">aid</span>
+        </a>
+
+        <!-- Toggle Button for Mobile -->
+        <button
+            class="navbar-toggler border-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbar"
+            aria-controls="navbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbar">
+            {% if session["user_id"] %}
+            <!-- Left Links for Logged-in Users -->
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link fw-medium" href="/profile">My Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-medium" href="/issues">Issues</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-medium" href="/mechanics">Mechanics</a>
+                </li>
+            </ul>
+
+            <!-- Right Links for Logged-in Users -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-primary fw-bold">{{ username }} {{ role }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary rounded-pill ms-2 px-4" href="/logout">Log Out</a>
+                </li>
+            </ul>
+            {% else %}
+            <!-- Right Links for Guests -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="btn btn-primary rounded-pill me-2 px-4" href="/register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-secondary rounded-pill px-4" href="/login">Log In</a>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+
+        {% if get_flashed_messages() %}
+        <header>
+            <div class="alert alert-primary mb-0 text-center" role="alert">
+                {{ get_flashed_messages() | join(" ") }}
+            </div>
+        </header>
+        {% endif %}
+
+        <main class="container py-5 px-3 text-center">
+            {% block main %}{% endblock %}
+        </main>
+
+        <footer class="mb-5">
+            <!--<p class="mb-3 small text-center text-muted">
+                Data provided by
+                <a
+                    href="https://open.canada.ca/data/en/dataset/90fed587-1364-4f33-a9ee-208181dc0b97"
+                    >Temporary Foreign Worker Program (TFWP)</a
+                >, Government of Canada.
+            </p>-->
+            <p class="mb-3 small text-center text-muted">
+                Made by <a href="">Team Kaizen</a>, as project for
+                <a href="https://cs50.harvard.edu/x/2024/"
+                    >Innovate to Impact</a
+                >
+                Hackathon.
+            </p>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Adapted from https://stackoverflow.com/a/10162353
+                    const html =
+                        "<!DOCTYPE " +
+                        document.doctype.name +
+                        (document.doctype.publicId
+                            ? ' PUBLIC "' + document.doctype.publicId + '"'
+                            : "") +
+                        (!document.doctype.publicId && document.doctype.systemId
+                            ? " SYSTEM"
+                            : "") +
+                        (document.doctype.systemId
+                            ? ' "' + document.doctype.systemId + '"'
+                            : "") +
+                        ">\n" +
+                        document.documentElement.outerHTML;
+                    document.querySelector(
+                        'form[action="https://validator.w3.org/check"] > input[name="fragment"]'
+                    ).value = html;
+
+                    // This is where I try to implement the theme change button
+                    let buyButton = document.querySelector("#theme_button");
+                    buyButton.addEventListener("click", function () {
+                        let date = new Date();
+                        let dateString = date.toString();
+                        document.querySelector("#date_field").value =
+                            dateString;
+                    });
+                });
+            </script>
+        </footer>
+    </body>
+</html>
