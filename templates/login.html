@@ -1,14 +1,21 @@
 {% extends "layout.html" %} {% block title %} Log In {% endblock %} {% block
 main %}
 <div class="text-center mb-4">
-    <h1 class="display-4">Welcome to <span class="text-primary">Aut<img
-        src="/static/fix-icon.svg"
-        width="40"
-        height="40"
-        alt="o"
-    />aid!</span></h1>
-    <p class="lead">We Connect skilled mechanics with clients who need them most.<br />
-        New here? <a href="/register">Register Now!</a></p>
+    <h1 class="display-4">
+        Welcome to
+        <span class="text-primary"
+            >Aut<img
+                src="/static/fix-icon.svg"
+                width="40"
+                height="40"
+                alt="o"
+            />aid!</span
+        >
+    </h1>
+    <p class="lead">
+        We Connect skilled mechanics with clients who need them most.<br />
+        New here? <a href="/register">Register Now!</a>
+    </p>
 </div>
 <form action="/login" method="post">
     <div class="mb-3">
