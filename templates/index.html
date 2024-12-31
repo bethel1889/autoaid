@@ -1,84 +1,68 @@
 {% extends "layout.html" %} {% block title %} Welcome to AutoAid {% endblock %}
 {% block main %}
 <div class="container py-5">
-    <!-- Header Section -->
-    <div class="text-center mb-4">
-        <h1 class="display-4">
-            Welcome to
-            <span class="text-primary"
-                >Aut<img
-                    src="/static/fix-icon.svg"
-                    width="40"
-                    height="40"
-                    alt="o"
-                />aid</span
-            >
-        </h1>
-        <p class="lead">
-            Do you have car trouble and need the best mechanic for your car?<br />
-            Are you a skilled mechanic who needs to find clients all over the
-            country in need of your services?<br />We connect skilled mechanics
-            with those who need them most.
-        </p>
-    </div>
+  <!-- Header Section -->
+  <div class="text-center mb-4">
+    <h1 class="display-4">
+      Welcome to
+      <span class="text-primary"
+        >Aut<img
+          src="/static/fix-icon.svg"
+          width="40"
+          height="40"
+          alt="o"
+        />aid</span
+      >
+    </h1>
+    <p class="lead">
+      Do you have car trouble and need the best mechanic for your car?<br />
+      Are you a skilled mechanic who needs to find clients all over the country
+      in need of your services?<br />We connect skilled mechanics with those who
+      need them most.
+    </p>
+  </div>
 
-    <!-- Features Section -->
-    <div class="row text-center mb-5">
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Quick Issue Reporting</h5>
-                    <p class="card-text">
-                        Easily report car issues with detailed descriptions for
-                        faster resolution.
-                    </p>
-                </div>
-            </div>
+  <!-- Features Section -->
+  <div class="row text-center mb-5">
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Quick Issue Reporting</h5>
+          <p class="card-text">
+            Easily report car issues with detailed descriptions for faster
+            resolution.
+          </p>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Search for Mechanics</h5>
-                    <p class="card-text">
-                        Find trusted mechanics near you based on location.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Build Your Profile</h5>
-                    <p class="card-text">
-                        Showcase your services or track issues with a
-                        personalized profile.
-                    </p>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-
-    <!-- Call-to-Action Buttons -->
-    <div class="text-center mb-5">
-        <a href="/mechanics" class="btn btn-primary btn-lg me-3"
-            >Find a Mechanic</a
-        >
-        <a href="/create_issue" class="btn btn-secondary btn-lg"
-            >Commission a Job</a
-        >
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Search for Mechanics</h5>
+          <p class="card-text">
+            Find trusted mechanics near you based on location.
+          </p>
+        </div>
+      </div>
     </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Build Your Profile</h5>
+          <p class="card-text">
+            Showcase your services or track issues with a personalized profile.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Footer Section -->
-    <footer class="text-center">
-        <p class="small text-muted">
-            <a href="/privacy-policy" class="text-decoration-none me-3"
-                >Privacy Policy</a
-            >
-            <a href="/terms-of-service" class="text-decoration-none me-3"
-                >Terms of Service</a
-            >
-            <a href="/contact" class="text-decoration-none">Contact Us</a>
-        </p>
-    </footer>
+  <!-- Call-to-Action Buttons -->
+  <div class="text-center mb-5">
+    <a href="/mechanics" class="btn btn-primary btn-lg me-3">Find a Mechanic</a>
+    <a href="/create_issue" class="btn btn-secondary btn-lg"
+      >Commission a Job</a
+    >
+  </div>
 </div>
 {% endblock %}
